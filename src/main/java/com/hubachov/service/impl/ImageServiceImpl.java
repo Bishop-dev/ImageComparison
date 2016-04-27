@@ -5,10 +5,8 @@ import com.hubachov.utils.image.comparator.ImageComparator;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,10 +25,10 @@ public class ImageServiceImpl implements ImageService {
     private String resultImageFile;
 
     @Override
-    public void analyzeImages(List<MultipartFile> images) throws IOException {
+    public int analyzeImages(List<MultipartFile> images) throws IOException {
         cleanUpDirectory();
         saveImagesToFiles(images);
-        ImageComparator.instance().compareTwoImages(IMG_PATH_PREFIX + imgFileNames.get(0),
+        return ImageComparator.newInstance().compareTwoImages(IMG_PATH_PREFIX + imgFileNames.get(0),
                 IMG_PATH_PREFIX + imgFileNames.get(1),
                 IMG_PATH_PREFIX + resultImageFile);
     }

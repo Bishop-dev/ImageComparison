@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ImageService {
 
-    void analyzeImages(List<MultipartFile> images) throws IOException;
+    int analyzeImages(List<MultipartFile> images) throws IOException;
 
 }

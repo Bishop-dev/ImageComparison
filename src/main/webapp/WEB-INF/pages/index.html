@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:if="${errorMessage}">
-    <p th:text="${errorMessage}"></p>
+    <p th:text="${errorMessage}" style="color: red"></p>
 </div>
 
     <div class="container">
@@ -27,6 +27,7 @@
         </form>
         <div th:if="${successMessage}">
             <p th:text="${successMessage}"></p>
+            <p th:text="'We found ' + ${differentAreas} + ' different areas'"></p>
             <p>Your first image</p>
             <img src="../../imgs/1.jpg"/>
             <p>Your second image</p>

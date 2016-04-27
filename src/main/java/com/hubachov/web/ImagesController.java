@@ -2,10 +2,10 @@ package com.hubachov.web;
 
 import com.hubachov.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,7 +30,9 @@ public class ImagesController {
             @RequestParam("secondImg") MultipartFile secondMultipartImage) {
         ModelAndView mav = new ModelAndView("index");
         try {
-            imageService.analyzeImages(Arrays.asList(firstMultipartImage, secondMultipartImage));
+            int differentAreas = imageService.analyzeImages(Arrays.asList(firstMultipartImage,
+                    secondMultipartImage));
+            mav.addObject("differentAreas", differentAreas);
         } catch (Exception e) {
             return mav.addObject("errorMessage", e.getMessage());
         }

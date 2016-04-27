@@ -5,13 +5,12 @@ import com.hubachov.utils.image.entity.Point;
 import com.hubachov.utils.image.loader.ImageLoader;
 
 import javax.imageio.ImageIO;
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class ImageComparator {
@@ -28,11 +27,15 @@ public class ImageComparator {
     private List<ArrayList<Point>> areasOfDifference = new ArrayList<>();
     private BufferedImage resultImage;
 
-    public static ImageComparator instance() {
+    private ImageComparator() {
+
+    }
+
+    public static ImageComparator newInstance() {
         return new ImageComparator();
     }
 
-    public void compareTwoImages(String firstImageFilePath,
+    public int compareTwoImages(String firstImageFilePath,
                                  String secondImageFilePath,
                                  String resultImageFilePath) {
         ImageLoader imageLoader = new ImageLoader();
@@ -42,6 +45,7 @@ public class ImageComparator {
         secondArray = PixelArrayConverter.convertBufferedImageToPixelArray(img2);
         try {
             compare(resultImageFilePath);
+            return areasOfDifference.size();
         } catch (IOException ioe) {
             throw new RuntimeException("Can't analyze pixel arrays", ioe);
         }
