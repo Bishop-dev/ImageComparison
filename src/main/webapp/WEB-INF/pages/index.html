@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Compare Images Here</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div th:if="${errorMessage}">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+    <div class="container">
+
+        <form method="post" action="uploadImages" enctype="multipart/form-data">
+            <p>Please, select two images and click "Compare". You will see generated output
+                image with different regions outlined with red rectangle </p>
+            <table id="fileTable">
+                <tr>
+                    <td><input name="firstImg" type="file" /></td>
+                </tr>
+                <tr>
+                    <td><input name="secondImg" type="file" /></td>
+                </tr>
+            </table>
+            <br />
+            <input type="submit" value="Compare" />
+        </form>
+        <div th:if="${successMessage}">
+            <p th:text="${successMessage}"></p>
+            <p>Your first image</p>
+            <img src="../../imgs/1.jpg"/>
+            <p>Your second image</p>
+            <img src="../../imgs/2.jpg"/>
+            <p>Result</p>
+            <img src="../../imgs/result.jpg"/>
+        </div>
+        <br />
+    </div>
+
+</body>
+</html>
